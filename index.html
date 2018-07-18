@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+    <html lang = "en">
+    <title>Geometric Designs</title>
+    <script>
+        //note: not the best option. I recognize that, but I am currently exploring better ways. 
+          //bring out the pasta, boys!
+        function hideScreen(){
+              document.getElementById('main-screen').classList.add('fade');
+          setTimeout(()=>{
+            document.getElementById('main-screen').classList.remove('fade');
+            document.getElementById('main-screen').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            }, 1000)
+  
+            Game.animate();
+          }
+      </script>
+    <style>
+        body{
+  margin: 0;
+  overflow-x:hidden;
+  overflow-y: scroll;
+  background-color: #0096881c;
+}
+
+.canvas-container{
+  width: 100%;
+  text-align: center;
+  min-height:703px;
+}
+
+canvas{
+  padding: 0;
+  margin: 10px;
+  display: inline;
+  border: 1px solid black;
+}
+canvas:hover{ 
+  cursor: none; 
+}
+
+.start-screen{
+  text-align: center;
+	background-color: black;
+	height: 700px;
+	width:  100%;
+}
+
+.start-text-container{
+
+  position: absolute;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  top:50%;
+  left: 50%;
+  margin: -55px 0 0 -200px;
+}
+
+.hidden{
+  display: none;
+}
+.fade{
+  animation-name: fadeout;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeout{
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.startText{
+	color: white;
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	text-align: center;
+	padding: 0;
+	user-select: none;		
+}
+
+.wipe{
+    background: white;
+    background: linear-gradient(to right, rgba(255,255,255,1) 55%,rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 70%);
+        animation: wipe 10s infinite;
+		color: rgba(255, 255, 255, 0.1);
+		background-size: 500px 100%;
+		background-position: 0 0;
+		background-color: #222;
+}
+@keyframes wipe{
+		0% {
+				background-position: top left;
+		}
+		100% {
+				background-position: top right;
+		}
+}
+
+
+.main{
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+	font-size: 3em;
+    width: 150px;
+    text-align: center;	
+}   
+
+.play{
+	font-size: 1.25em;
+	opacity: .8;
+    width: 100px;
+}
+.play:hover{
+	opacity: 1;
+	cursor: default;
+}
+.play:active{
+	background-color: white;
+}
+
+canvas{
+	border: 1px solid black;
+}
+	
+.bottom-text{
+	color: white;
+	bottom: 0;
+	font-size: 1em;
+}
+    </style>
+</head>
+<body>
+    <div class="start-screen" id='main-screen'>
+        <ul class='start-text-container'>
+            <li id='title' class='startText main wipe'>Snake</li>
+            <li class='startText play' onclick='hideScreen()'>Play Game</li>
+            <li class='startText play' onclick='hideScreen()'>Settings</li>
+        </ul>
+    </div> 
+
+    <div id='game' class='hidden canvas-container'>
+        <canvas id="myCanvas" width="600" height="500">Your browser does not support canvas.</canvas>
+        <p id='score' style='margin-top:-30px'>Score: 0</p>
+    </div>
+
+</div>
+        <script src = ></script>
+        <script src = ></script>
+    </div>
+</body>
+</html>
