@@ -3,7 +3,7 @@ const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 const size = 20;
 var developerMode = false; //setting to true allows you to watch animations frame by frame. Space advances frames and arrows work as expected.
-var gameSpeed = 4; //tells the program how many animations are in each transition. also affects game speed
+var gameSpeed = 5; //tells the program how many animations are in each transition. also affects game speed
 
 /*
 
@@ -94,16 +94,15 @@ const Game = {
           Snake.transition();
         }
         food.update();
-        food.render();
-        if (
-          Snake.head.location.x == Food.location.x &&
-          Snake.head.y == Food.location.y &&
-          developerMode
-        ) {
-          Snake.eatFood();
-          Food.reDraw();
+        if (developerMode){
+          if((Snake.head.location.x -.0001 <  Food.location.x && Snake.head.location.x + .0001 > Food.location.x) &&
+          (Snake.head.location.y -.0001 <  Food.location.y && Snake.head.location.y + .0001 > Food.location.y)){
+            Snake.eatFood();
+            Food.reDraw();
+          }  
         }
         Snake.draw();
+        food.render();
       }, this.refreshRate);
     }
   }
@@ -122,9 +121,10 @@ var Snake = {
     foodEaten: false,
 
     checkCollision(dir) {
+      //the rounding is necessary because of floating point errors in JS. Smooths out weird decimals for an exact gridpoint. 
       let collided = false;
-      let testX = this.location.x + gameSpeed * dir[0];
-      let testY = this.location.y + gameSpeed * dir[1];
+      let testX = Math.round(this.location.x + (gameSpeed * dir[0]));
+      let testY = Math.round(this.location.y + (gameSpeed * dir[1]));
 
       if (Snake.body.location.length == Game.grid.xMax * Game.grid.yMax) {
         Game.win;
@@ -141,8 +141,8 @@ var Snake = {
         collided = true;
       for (let i = 1; i < Snake.body.dir.length; i++) {
         if (
-          testX == Snake.body.location[i].x &&
-          testY == Snake.body.location[i].y
+          testX == Math.round(Snake.body.location[i].x) &&
+          testY == Math.round(Snake.body.location[i].y)
         )
           collided = true;
       }
@@ -268,8 +268,8 @@ var Snake = {
     this.body.move(); //update
 
     if (
-      this.head.location.x == Food.location.x &&
-      this.head.location.y == Food.location.y
+      (Snake.head.location.x -.0001 <  Food.location.x && Snake.head.location.x + .0001 > Food.location.x) &&
+      (Snake.head.location.y -.0001 <  Food.location.y && Snake.head.location.y + .0001 > Food.location.y)
     ) {
       Snake.foodEaten = true;
       Food.reDraw();
