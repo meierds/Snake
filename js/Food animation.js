@@ -1,5 +1,5 @@
 const foodImg = new Image();
-//foodImg.src = ;
+foodImg.src = 'images/Food.png';
 
 
 function sprite (srcImage) {

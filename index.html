@@ -3,12 +3,10 @@
 <html>
   <meta charset="utf-8" />
   <head>
-    <title>Geometric Designs</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Snake</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script>
-      //note: not the best option. I recognize that, but I am currently exploring better ways. 
-      //bring out the pasta, boys!
       function hideScreen() {
         document.getElementById('main-screen').classList.add('fade');
         setTimeout(() => {
@@ -36,5 +34,7 @@
         support canvas.</canvas>
       <p id='score' style='margin-top:-30px'>Score: 0</p>
     </div>
+    <script src='js/Snake.js'></script>
+    <script src='js/Food animation.js'></script>
   </body>
 </html>
