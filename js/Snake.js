@@ -95,7 +95,6 @@ const Game = {
         }
         food.update();
         food.render();
-        Snake.draw();
         if (
           Snake.head.location.x == Food.location.x &&
           Snake.head.y == Food.location.y &&
@@ -104,6 +103,7 @@ const Game = {
           Snake.eatFood();
           Food.reDraw();
         }
+        Snake.draw();
       }, this.refreshRate);
     }
   }
@@ -287,9 +287,9 @@ var Snake = {
   eatFood() {
     Game.Score++;
     this.body.location.push(
-      new Point(this.head.location.x, this.head.location.y)
+      new Point(this.body.location[this.body.location.length - 1].x, this.body.location[this.body.location.length -1].y)
     );
-    this.body.dir.push(this.head.dir);
+    this.body.dir.push(this.body.dir[this.body.dir.length -1]);
     document.getElementById("score").innerHTML = "Score: " + Game.Score;
   }
 };
