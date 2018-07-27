@@ -1,10 +1,8 @@
 //Global declarations are for ease of use during development. To be disabled in final version.
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-const size = 20;
+const size = sizeSlider.value;
 var developerMode = false; //setting to true allows you to watch animations frame by frame. Space advances frames and arrows work as expected.
-var gameSpeed = 5; //tells the program how many animations are in each transition. also affects game speed
-
 /*
 
 
@@ -17,12 +15,12 @@ const Game = {
   eventStack: [],
   Score: 0,
   frameCount: 0,
-  frames: gameSpeed,
+  frames: speedSlider.value,
   refreshRate: 1000 / 60,
   grid: {
-    xMax: canvas.width / size,
+    xMax: canvas.width / sizeSlider.value,
     xMin: 0,
-    yMax: canvas.height / size,
+    yMax: canvas.height / sizeSlider.value,
     yMin: 0
   },
   board: [],
@@ -79,6 +77,14 @@ const Game = {
 
   animate() {
     //initialization commands:
+    Game.frames = 10 - speedSlider.value;
+    Snake.size = sizeSlider.value;
+    Food.size = Snake.size;
+    food.height = Snake.size;
+    food.width = Snake.size;
+    Snake.head.color = colorWell1.value;
+    Snake.body.color = colorWell2.value;
+
     Snake.draw();
     Food.reDraw();
     this.board = new Array(this.grid.xMax * this.grid.yMax).fill(0);
@@ -109,7 +115,7 @@ const Game = {
 };
 
 var Snake = {
-  size: 20,
+  size: sizeSlider.value,
   head: {
     color: "red",
     location: new Point(
@@ -123,8 +129,8 @@ var Snake = {
     checkCollision(dir) {
       //the rounding is necessary because of floating point errors in JS. Smooths out weird decimals for an exact gridpoint. 
       let collided = false;
-      let testX = Math.round(this.location.x + (gameSpeed * dir[0]));
-      let testY = Math.round(this.location.y + (gameSpeed * dir[1]));
+      let testX = Math.round(this.location.x + (Game.frames * dir[0]));
+      let testY = Math.round(this.location.y + (Game.frames * dir[1]));
 
       if (Snake.body.location.length == Game.grid.xMax * Game.grid.yMax) {
         Game.win;
@@ -182,13 +188,13 @@ var Snake = {
 
         //if the snake is longer than 1 unit, this will prevent backtracking.
         if (Snake.body.dir.length <= 1)
-          return [newDir[0] / gameSpeed, newDir[1] / gameSpeed];
+          return [newDir[0] / Game.frames, newDir[1] / Game.frames];
         else if (
           Snake.body.dir.length > 1 &&
-          (newDir[0] / gameSpeed != -curDir[0] ||
-            newDir[1] / gameSpeed != -curDir[1])
+          (newDir[0] / Game.frames != -curDir[0] ||
+            newDir[1] / Game.frames != -curDir[1])
         ) {
-          return [newDir[0] / gameSpeed, newDir[1] / gameSpeed];
+          return [newDir[0] / Game.frames, newDir[1] / Game.frames];
         } else return curDir;
       } else {
         return curDir;
@@ -226,9 +232,9 @@ var Snake = {
       for (let i = 1; i < bodyLength; i++) {
         Game.board[Game.boardHash(this.location[i])] = 0;
         this.location[i].x =
-          this.location[i - 1].x - this.dir[i][0] * gameSpeed;
+        this.location[i - 1].x - this.dir[i][0] * Game.frames;
         this.location[i].y =
-          this.location[i - 1].y - this.dir[i][1] * gameSpeed;
+        this.location[i - 1].y - this.dir[i][1] * Game.frames;
         this.location[i].recalculate();
         Game.board[Game.boardHash(this.location[i])] = 1;
       }
