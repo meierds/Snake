@@ -5,30 +5,6 @@
   <head>
     <title>Snake</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
-
-    <script>
-      function hideScreen(hideScreen, showScreen) {
-        let show = document.getElementById(showScreen);
-        let hide = document.getElementById(hideScreen);
-
-        hide.classList.add('fadeout');
-
-        setTimeout(() => {
-          hide.classList.remove('fadeout');
-          hide.classList.add('hidden');
-          show.classList.remove('hidden');
-          show.classList.add('fadein');
-        }, 500)
-
-        setTimeout(() =>{
-          show.classList.remove('fadein')
-        },1000)
-
-        if(showScreen === 'game'){
-          Game.animate();
-        }
-      }
-    </script>
   </head>
 
   <body>
@@ -50,8 +26,8 @@
                 <li>Body Color</li>
             </ul>
             <ul class='input-selections'>
-                <li><input type="range" id='slider1' name='Speed' min="0" max="10" value="5"></li>
-                <li><input type="range" id='slider2' min="5" max="40" value="20" step='5'></li>
+                <li><input type="range" id='speedSlider' name='Speed' min="0" max="10" value="5"></li>
+                <li><input type="range" id='sizeSlider' min="5" max="40" value="20" step='5'></li>
                 <li><input type="color" value="#ff0000" id="headColorWell"></li>
                 <li><input type="color" value="#000000"id="bodyColorWell"></li>
                 <!-- The color selector will need a plugin/polyfill for operation in IE-->
@@ -64,30 +40,12 @@
         </div>
     </div>
 
-    <script>
-        let slider1 = document.getElementById('slider1');
-        let slider2 = document.getElementById('slider2');
-        let colorWell1 = document.getElementById('headColorWell');
-        let colorWell2 = document.getElementById('bodyColorWell');
-        let submit = document.getElementById('submitButton');
-            
-        function getSliderValues(val1,val2){;
-            console.log("Slider 1: " + val1 + "     Slider 2: " + val2);
-        }
-
-    function restoreDefault(){
-        slider1.value = slider1.defaultValue;
-        slider2.value = slider2.defaultValue;
-        colorWell1.value = colorWell1.defaultValue;
-        colorWell2.value = colorWell2.defaultValue;
-    }
-    </script>
-    
     <div id='game' class='hidden canvas-container'>
       <canvas id="myCanvas" width="600" height="600">Your browser does not
         support canvas.</canvas>
-      <p id='score' style='margin-top:-30px'>Score: 0</p>
+      <p id='score' style="margin-top: -10px">Score: 0 <br>Hi-Score: 0 <br>Length: 1</p>
     </div>
+    <script src='js/HTML_interaction.js'></script>
     <script src='js/Snake.js'></script>
     <script src='js/Food animation.js'></script>
   </body>

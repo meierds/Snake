@@ -14,6 +14,7 @@ var developerMode = false; //setting to true allows you to watch animations fram
 const Game = {
   eventStack: [],
   Score: 0,
+  hiscore: 0,
   frameCount: 0,
   frames: speedSlider.value,
   refreshRate: 1000 / 60,
@@ -63,7 +64,7 @@ const Game = {
     this.eventStack = [];
     this.framecount = 0;
     this.board = [];
-    document.getElementById("score").innerHTML = "Score: " + Game.Score;
+    document.getElementById("score").innerHTML = "Score: " + Game.Score + "<br>Hi-Score: " + Game.hiscore + "<br>Length: 1";
     this.animate();
   },
   lost: false,
@@ -225,8 +226,7 @@ var Snake = {
       //adds new points to the location array if they don't match in size
       if (bodyLength != this.location.length) {
         for (let i = 0; i < bodyLength; i++) {
-          this.dir.push[new Point()];
-          console.log("new point made");
+          this.dir.push[new Point()];;
         }
       }
       for (let i = 1; i < bodyLength; i++) {
@@ -291,12 +291,13 @@ var Snake = {
     this.body.translate();
   },
   eatFood() {
-    Game.Score++;
+    Game.Score += 10 - Game.frames;
+    if (Game.Score > Game.hiscore) Game.hiscore = Game.Score;
     this.body.location.push(
       new Point(this.body.location[this.body.location.length - 1].x, this.body.location[this.body.location.length -1].y)
     );
     this.body.dir.push(this.body.dir[this.body.dir.length -1]);
-    document.getElementById("score").innerHTML = "Score: " + Game.Score;
+    document.getElementById("score").innerHTML = "Score: " + Game.Score + "<br>Hi-Score: " + Game.hiscore + "<br>Length: " + Snake.body.dir.length;
   }
 };
 
