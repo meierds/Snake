@@ -5,8 +5,8 @@ let colorWell2 = document.getElementById('bodyColorWell');
 let submit = document.getElementById('submitButton');
 
 function restoreDefault(){
-    slider1.value = slider1.defaultValue;
-    slider2.value = slider2.defaultValue;
+    sizeSlider.value = sizeSlider.defaultValue;
+    speedSlider2.value = speedSlider.defaultValue;
     colorWell1.value = colorWell1.defaultValue;
     colorWell2.value = colorWell2.defaultValue;
 }
