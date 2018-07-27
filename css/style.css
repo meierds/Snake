@@ -23,10 +23,13 @@ canvas:hover {
 }
 
 .start-screen {
+    position: absolute;
     text-align: center;
     background-color: black;
-    height: 700px;
-    width: 100%;
+    left: 50%;
+    margin-left: -300px;
+    height: 600px;
+    width: 600px;
 }
 
 .start-text-container {
@@ -48,17 +51,26 @@ canvas:hover {
     display: none;
 }
 
-.fade {
+.fadeout {
     -webkit-animation-name: fadeout;
     animation-name: fadeout;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
     -webkit-animation-iteration-count: 1;
     animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
 }
-
+.fadein{
+    -webkit-animation-name: fadein;
+    animation-name: fadein;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
 @-webkit-keyframes fadeout {
     0% {
         opacity: 1;
@@ -74,6 +86,23 @@ canvas:hover {
     }
     100% {
         opacity: 0;
+    }
+}
+@-webkit-keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
@@ -132,6 +161,7 @@ canvas:hover {
 }
 
 .play {
+    margin-left: 5px;
     font-size: 1.25em;
     opacity: .8;
     width: 100px;
@@ -154,4 +184,89 @@ canvas {
     color: white;
     bottom: 0;
     font-size: 1em;
+}
+
+/*------- Settings Page----------*/
+.settings-container{
+    color: white;
+    left: 50%;
+    padding: 30px;
+    margin-left: -300px;
+    position: relative;
+    background: linear-gradient(to top right, black, rgba(73, 73, 73, 0.95));
+    width: 600px;
+    height: 600px;
+  }
+
+#header-settings{
+    padding: 0;
+    margin: 0;
+    font-family: 'Helvetica';
+    text-align: center;
+    font-size: 3.5em;
+}
+
+ul{
+    padding: 0;
+    list-style-type: none;
+}
+
+ul > li{
+      padding: 5px;
+      font-family: 'Helvetica';
+      font-size:2em
+}
+
+.settings-inputs{
+    margin-top: 85px;
+    left: 100px;
+}
+
+.settings-labels{
+    margin-left: 45px;
+    float: left;
+    overflow: auto;
+}
+
+.input-selections{
+    float: right;
+    overflow: auto;
+    margin-right: 100px;
+    text-align: center;
+}
+  
+.slider:focus{
+    outline: none;
+}
+
+.button-list{
+    position: absolute;
+    display: inline-block;
+    left: 50%;
+    margin-left: -158px;
+    bottom: 100px;
+}
+
+.button{
+    text-align: center;
+    font-family: "Bookman Old Style";
+    font-size: 1em;
+    width: 150px;
+    background-color: #77351d;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    opacity: .9; 
+}
+
+.button:focus{
+    outline: none;
+}
+
+.button:hover{
+    opacity: 1;
+}
+
+.submit{
+    margin-left: 12px;
 }
